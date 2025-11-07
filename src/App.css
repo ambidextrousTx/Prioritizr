@@ -112,7 +112,7 @@ body {
 }
 
 .item::before {
-  content: "Drag";
+  content: "Drag me!";
   position: absolute;
   top: 6px;
   right: 10px;

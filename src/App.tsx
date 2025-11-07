@@ -70,7 +70,7 @@ const App: React.FC = () => {
           onKeyDown={(e) => e.key === 'Enter' && addEntry()}
           placeholder="What is on the agenda?"
         />
-        <button className='btn' onClick={addEntry}>Add Entry</button>
+        <button className='btn' onClick={addEntry}>Add</button>
       </div>
 
       {entries.length === 0 ? (
