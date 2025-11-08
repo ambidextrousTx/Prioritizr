@@ -119,3 +119,59 @@ body {
   font-size: 0.7rem;
   color: #aaa;
 }
+
+/* ──────────────────────── MODAL ──────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal {
+  background: #fff8e1;
+  border: 3px solid #ffe082;
+  border-radius: 16px;
+  max-width: 380px;
+  width: 90%;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(255, 193, 7, 0.2);
+  animation: popIn 0.3s ease-out;
+}
+
+.modal h3 {
+  margin: 0 0 1rem;
+  color: #e65100;
+  font-size: 1.4rem;
+}
+
+.modal p {
+  margin: 0 0 1.5rem;
+  color: #5d4037;
+  line-height: 1.5;
+}
+
+.modal .btn-close {
+  background: #ff8a80;
+  min-width: 100px;
+}
+
+.modal .btn-close:hover {
+  background: #ff5252;
+}
+
+/* tiny animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}

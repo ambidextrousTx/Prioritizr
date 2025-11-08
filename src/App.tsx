@@ -10,13 +10,21 @@ const App: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [newEntry, setNewEntry] = useState<string>('');
   const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
+  const [showLimitModal, setShowLimitModal] = useState(false);
+  const MAX_ENTRIES = 10;
 
   const addEntry = () => {
+    if (entries.length >= MAX_ENTRIES) {
+      setShowLimitModal(true);
+      return;
+    }
     if (newEntry.trim()) {
       setEntries([...entries, { id: Date.now().toString(), text: newEntry }]);
       setNewEntry('');
     }
   };
+
+  const closeModal = () => setShowLimitModal(false);
 
   const handleDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     setDraggedIdx(index);
@@ -93,6 +101,23 @@ const App: React.FC = () => {
             </li>
           ))}
         </ul>
+      )}
+
+      {/* Show limit modal */}
+      {showLimitModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>If everything is a priority, nothing is a priority!</h3>
+            <p>
+              You've reached the limit of <strong>{MAX_ENTRIES}</strong> entries.
+              <br />
+              Time to prioritize or delete a few!
+            </p>
+            <button className="btn btn-close" onClick={closeModal}>
+              Got it
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
