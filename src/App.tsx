@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 interface Entry {
@@ -12,6 +12,19 @@ const App: React.FC = () => {
   const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const MAX_ENTRIES = 10;
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setShowLimitModal(false);
+      }
+    };
+
+    if (showLimitModal) {
+      window.addEventListener('keydown', handleEsc);
+      return () => window.removeEventListener('keydown', handleEsc);
+    }
+  }, [showLimitModal])
 
   const addEntry = () => {
     if (entries.length >= MAX_ENTRIES) {
