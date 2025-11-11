@@ -11,6 +11,8 @@ const App: React.FC = () => {
   const [newEntry, setNewEntry] = useState<string>('');
   const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
   const [showLimitModal, setShowLimitModal] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editText, setEditText] = useState('');
   const MAX_ENTRIES = 10;
 
   useEffect(() => {
@@ -37,9 +39,27 @@ const App: React.FC = () => {
     }
   };
 
+  const startEdit = (id: string, text: string) => {
+    setEditingId(id);
+    setEditText(text);
+  };
+
+  const saveEdit = () => {
+    if (!editText.trim() || !editingId) return;
+    setEntries(entries.map(e => e.id === editingId ? { ...e, text: editText } : e));
+    setEditingId(null);
+    setEditText('');
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditText('');
+  };
+
   const closeModal = () => setShowLimitModal(false);
 
   const handleDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+    if (editingId) return;
     setDraggedIdx(index);
     e.currentTarget.classList.add('dragging');
   };
@@ -101,16 +121,35 @@ const App: React.FC = () => {
           {entries.map((entry, index) => (
             <li
               key={entry.id}
-              className="item"
-              draggable
+              className={`item ${editingId === entry.id ? 'editing' : ''}`}
+              draggable={!editingId}
               onDragStart={e => handleDragStart(e, index)}
               onDragOver={handleDragOver}
               onDragEnter={handleDragEnter}
               onDragLeave={handleDragLeave}
               onDrop={e => handleDrop(e, index)}
               onDragEnd={handleDragEnd}
+              onDoubleClick={() => startEdit(entry.id, entry.text)}
               >
-                {entry.text}
+                {editingId === entry.id ? (
+                <>
+                  <textarea
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveEdit(); }
+                      if (e.key === 'Escape') cancelEdit();
+                    }}
+                    autoFocus
+                  />
+                  <div className="edit-actions">
+                    <button className="btn btn-small btn-save" onClick={saveEdit}>Save</button>
+                    <button className="btn btn-small btn-cancel" onClick={cancelEdit}>Cancel</button>
+                  </div>
+                </>
+              ) : (
+                entry.text
+              )}
             </li>
           ))}
         </ul>

@@ -175,3 +175,57 @@ body {
   from { transform: scale(0.85); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
 }
+
+/* ──────────────────────── EDIT MODE ──────────────────────── */
+.item.editing {
+  background: #e8f5e9;
+  border-color: #81c784;
+  box-shadow: 0 0 0 4px rgba(129, 212, 199, 0.25);
+}
+
+.item textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 10px;
+  border: 2px solid #81c784;
+  border-radius: 8px;
+  background: white;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: none;
+  outline: none;
+}
+
+.item textarea:focus {
+  border-color: #66c2b4;
+  box-shadow: 0 0 0 4px rgba(102, 194, 180, 0.2);
+}
+
+.item .edit-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.item .btn-small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+.item .btn-save {
+  background: #81d4c7;
+}
+
+.item .btn-save:hover {
+  background: #66c2b4;
+}
+
+.item .btn-cancel {
+  background: #ff8a80;
+}
+
+.item .btn-cancel:hover {
+  background: #ff5252;
+}
