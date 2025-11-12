@@ -229,3 +229,44 @@ body {
 .item .btn-cancel:hover {
   background: #ff5252;
 }
+
+/* ──────────────────────── DELETE BUTTON ──────────────────────── */
+.item .delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: #ff8a80;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(255, 138, 128, 0.3);
+}
+
+.item:hover .delete-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.item .delete-btn:hover {
+  background: #ff5252;
+  transform: scale(1.1);
+}
+
+.item .delete-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+/* Adjust item padding when delete button is visible */
+.item {
+  position: relative;
+  padding-right: 48px !important;
+}
