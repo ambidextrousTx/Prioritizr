@@ -26,7 +26,7 @@
   --bg-gradient-end:   #e8f5e9;
   --drag-background:   #e8f5e9; 
   --editing-background: #e8f5e9;
-  --bg-card:           rgba(255,255,255,.92);
+  --bg-card:           rgba(255, 255, 255, .92);
 }
 
 * {
@@ -47,7 +47,7 @@ body {
   width: 100%;
   max-width: 420px;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--bg-card);
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(10px);
@@ -137,13 +137,13 @@ body {
 }
 
 .item.drag-over {
-  background: var(drag-background);
+  background: var(--drag-background);
   border-color: var(--color-success);
   transform: scale(1.02);
 }
 
 .item::before {
-  content: "Drag me!";
+  content: "";
   position: absolute;
   top: 6px;
   right: 10px;
