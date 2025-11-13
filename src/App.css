@@ -1,3 +1,34 @@
+/* ──────────────────────── PASTEL PALETTE ──────────────────────── */
+:root {
+  /* Core brand */
+  --color-primary:   #81d4c7;   /* mint */
+  --color-primary-dark: #66c2b4;
+
+  /* Accents */
+  --color-accent:    #fff8e1;   /* soft peach */
+  --color-accent-border: #ffe082;
+
+  /* Danger / Delete */
+  --color-danger:    #ff8a80;
+  --color-danger-dark: #ff5252;
+
+  /* Success / Edit */
+  --color-success:   #81c784;
+  --color-success-dark: #66c2b4;
+
+  /* Text */
+  --color-title:     #4a707a;
+  --color-muted:     #88a0a8;
+  --color-body:      #5d4037;
+
+  /* Backgrounds */
+  --bg-gradient-start: #e0f7fa;
+  --bg-gradient-end:   #e8f5e9;
+  --drag-background:   #e8f5e9; 
+  --editing-background: #e8f5e9;
+  --bg-card:           rgba(255,255,255,.92);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,7 +36,7 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -47,13 +78,13 @@ body {
 }
 
 .input:focus {
-  border-color: #81d4c7;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 4px rgba(129, 212, 199, 0.2);
 }
 
 .btn {
   padding: 12px 20px;
-  background: #81d4c7;
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 10px;
@@ -82,8 +113,8 @@ body {
 .item {
   padding: 16px 18px;
   margin: 10px 0;
-  background: #fff8e1;
-  border: 2px solid #ffe082;
+  background: var(--color-accent);
+  border: 2px solid var(--color-accent-border);
   border-radius: 12px;
   cursor: move;
   user-select: none;
@@ -106,8 +137,8 @@ body {
 }
 
 .item.drag-over {
-  background: #e8f5e9;
-  border-color: #81c784;
+  background: var(drag-background);
+  border-color: var(--color-success);
   transform: scale(1.02);
 }
 
@@ -134,8 +165,8 @@ body {
 }
 
 .modal {
-  background: #fff8e1;
-  border: 3px solid #ffe082;
+  background: var(--color-accent);
+  border: 3px solid var(--color-accent-border);
   border-radius: 16px;
   max-width: 380px;
   width: 90%;
@@ -153,7 +184,7 @@ body {
 
 .modal p {
   margin: 0 0 1.5rem;
-  color: #5d4037;
+  color: var(--color-body);
   line-height: 1.5;
 }
 
@@ -215,7 +246,7 @@ body {
 }
 
 .item .btn-save {
-  background: #81d4c7;
+  background: var(--color-primary);
 }
 
 .item .btn-save:hover {
