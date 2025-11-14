@@ -55,7 +55,7 @@ body {
 
 .title {
   text-align: center;
-  color: #4a707a;
+  color: var(--color-title);
   margin-bottom: 1.5rem;
   font-weight: 600;
   font-size: 1.8rem;
@@ -99,7 +99,7 @@ body {
 
 .empty-state {
   text-align: center;
-  color: #88a0a8;
+  color: var(--color-muted);
   font-style: italic;
   padding: 2rem 0;
 }
@@ -209,7 +209,7 @@ body {
 
 /* ──────────────────────── EDIT MODE ──────────────────────── */
 .item.editing {
-  background: #e8f5e9;
+  background: var(--editing-background);
   border-color: #81c784;
   box-shadow: 0 0 0 4px rgba(129, 212, 199, 0.25);
 }
