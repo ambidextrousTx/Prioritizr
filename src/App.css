@@ -132,7 +132,7 @@ body {
 .item.dragging {
   opacity: 0.6;
   background: #ffebee;
-  border-color: #ff8a80;
+  border-color: var(--color-danger);
   transform: rotate(4deg);
 }
 
@@ -189,7 +189,7 @@ body {
 }
 
 .modal .btn-close {
-  background: #ff8a80;
+  background: var(color-danger);
   min-width: 100px;
 }
 
@@ -268,7 +268,7 @@ body {
   right: 8px;
   width: 32px;
   height: 32px;
-  background: #ff8a80;
+  background: var(--color-danger);
   border: none;
   border-radius: 50%;
   cursor: pointer;
