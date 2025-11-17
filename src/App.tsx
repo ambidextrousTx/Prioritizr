@@ -13,7 +13,12 @@ const App: React.FC = () => {
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const MAX_ENTRIES = 10;
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -110,6 +115,9 @@ const App: React.FC = () => {
   return (
     <div className="container">
       <h1 className="title">Drop-n-Drop Task Prioritizer</h1>
+      <button className="btn" onClick={() => setTheme(t => t==='light'?'dark':'light')}>
+        {theme === 'light' ? 'Dark' : 'Light'} Mode
+      </button>
       <div className="input-group">
         <input
           type="text"

@@ -29,6 +29,23 @@
   --bg-card:           rgba(255, 255, 255, .92);
 }
 
+/* Dark mode overrides */
+.dark {
+  --color-primary:        #4db6ac;
+  --color-primary-dark:   #388e83;
+  --color-accent:         #424242;
+  --color-accent-border:  #616161;
+  --color-danger:         #ef5350;
+  --color-danger-dark:    #d32f2f;
+  --color-success:        #66bb6a;
+  --bg-gradient-start:    #263238;
+  --bg-gradient-end:      #37474f;
+  --bg-card:              rgba(55,71,79,.95);
+  --color-title:          #e0f2f1;
+  --color-muted:          #b0bec5;
+  --color-body:           #eceff1;
+}
+
 * {
   box-sizing: border-box;
 }
