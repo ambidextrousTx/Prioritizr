@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Entry, addEntry, deleteEntry, updateEntry, reorderEntries, MAX_ENTRIES } from './entries';
 import './App.css';
-
-interface Entry {
-  id: string;
-  text: string;
-}
 
 const App: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -14,7 +10,6 @@ const App: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const MAX_ENTRIES = 10;
 
   useEffect(() => {
     document.body.classList.toggle('dark', theme === 'dark');
@@ -33,15 +28,16 @@ const App: React.FC = () => {
     }
   }, [showLimitModal])
 
-  const addEntry = () => {
-    if (entries.length >= MAX_ENTRIES) {
-      setShowLimitModal(true);
-      return;
-    }
-    if (newEntry.trim()) {
-      setEntries([...entries, { id: Date.now().toString(), text: newEntry }]);
-      setNewEntry('');
-    }
+  const addEntryHandler = () => {
+    const { entries: newEntries, showLimit } = addEntry(entries, newEntry);
+    setEntries(newEntries);
+    if (showLimit) setShowLimitModal(true);
+      else setNewEntry('');
+  };
+
+  const deleteEntryHandler = (id: string) => {
+    setEntries(deleteEntry(entries, id));
+    if (editingId === id) cancelEdit();
   };
 
   const startEdit = (id: string, text: string) => {
@@ -51,7 +47,7 @@ const App: React.FC = () => {
 
   const saveEdit = () => {
     if (!editText.trim() || !editingId) return;
-    setEntries(entries.map(e => e.id === editingId ? { ...e, text: editText } : e));
+    setEntries(updateEntry(entries, editingId!, editText));
     setEditingId(null);
     setEditText('');
   };
@@ -91,7 +87,7 @@ const App: React.FC = () => {
     const [draggedItem] = newEntries.splice(draggedIdx, 1);
     newEntries.splice(dropIndex, 0, draggedItem);
 
-    setEntries(newEntries);
+    setEntries(reorderEntries(entries, draggedIdx!, dropIndex));
     setDraggedIdx(null);
   };
 
@@ -102,14 +98,6 @@ const App: React.FC = () => {
     document.querySelectorAll('li').forEach(li => {
       li.classList.remove('drag-over');
     });
-  };
-
-  const deleteEntry = (id: string) => {
-    setEntries(entries.filter(e => e.id !== id));
-    if (editingId === id) {
-      setEditingId(null);
-      setEditText('');
-    }
   };
 
   return (
@@ -124,10 +112,10 @@ const App: React.FC = () => {
           className="input"
           value={newEntry}
           onChange={(e) => setNewEntry(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && addEntry()}
+          onKeyDown={(e) => e.key === 'Enter' && addEntryHandler()}
           placeholder="What is on the agenda?"
         />
-        <button className='btn' onClick={addEntry}>Add</button>
+        <button className='btn' onClick={addEntryHandler}>Add</button>
       </div>
 
       {entries.length === 0 ? (
@@ -168,7 +156,7 @@ const App: React.FC = () => {
               )}
               <button
               className="delete-btn"
-              onClick={() => deleteEntry(entry.id)}
+              onClick={() => deleteEntryHandler(entry.id)}
               title="Delete this entry"
             >
               <svg viewBox="0 0 24 24">
