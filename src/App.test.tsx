@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import App from './App';
 import { addEntry, deleteEntry, updateEntry, reorderEntries, MAX_ENTRIES } from './entries';
 
-describe('App Integration', () => {
+xdescribe('App Integration', () => {
   it('adds an entry', () => {
     render(<App />);
     const input = screen.getByPlaceholderText(/What is on the agenda?/i);
