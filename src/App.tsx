@@ -102,10 +102,12 @@ const App: React.FC = () => {
 
   return (
     <div className="container">
+      <div className="topButton">
+        <button className="btn" onClick={() => setTheme(t => t==='light'?'dark':'light')}>
+          {theme === 'light' ? 'Dark' : 'Light'} Mode
+        </button>
+      </div>
       <h1 className="title">Drop-n-Drop Task Prioritizer</h1>
-      <button className="btn" onClick={() => setTheme(t => t==='light'?'dark':'light')}>
-        {theme === 'light' ? 'Dark' : 'Light'} Mode
-      </button>
       <div className="input-group">
         <input
           type="text"
